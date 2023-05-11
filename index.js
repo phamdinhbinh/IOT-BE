@@ -63,7 +63,8 @@ const connection = require('./app/commons/connect');
 const moment = require('moment');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-cron.schedule(' * * * * *', () => {
+// '*/10 * * * * *'
+cron.schedule('*/30 * * * * *' , () => {
     let c= (JSON.parse(condition.message))
     console.log('This function will run minute second');
     connection.query("SELECT state, device, startPoint, endPoint, timeStart, timeEnd, mode FROM stage_item WHERE date= ?", [moment(new Date()).format("DD/MM/YYYY")], (err, data)=> {
@@ -122,7 +123,7 @@ cron.schedule(' * * * * *', () => {
                 
                
             })
-            console.log("* * * *")
+            console.log("* * * * * * * * *")
             //  const {startPoint, endPoint, device, state, timeStart, timeEnd, mode }= data[0]
         
         }
